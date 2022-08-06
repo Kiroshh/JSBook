@@ -33,14 +33,17 @@ const App = () => {
             //     target: 'es2015'
             // });
 
-            const result= await esbuild.build({
-                entryPoints:['index.js'],
-                bundle:true,
-                write:false,
-                plugins:[unpkgPathPlugin()]
+            const result = await esbuild.build({
+                entryPoints: ['index.js'],
+                bundle: true,
+                write: false,
+                plugins: [unpkgPathPlugin()],
+                define: {
+                    'process.env.NODE_ENV': '"production"',
+                    global: 'window'
+                }
             })
 
-            console.log(result.outputFiles[0].text);
             setCode(result.outputFiles[0].text);
         } catch (err) {
             console.error(err);
