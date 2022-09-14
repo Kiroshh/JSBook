@@ -47,3 +47,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 ![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+//use the following to test css import
+//import 'bulma/css/bulma.css';

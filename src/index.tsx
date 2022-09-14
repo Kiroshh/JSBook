@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import {useEffect, useState, useRef} from "react";
 import * as esbuild from 'esbuild-wasm'
 import {unpkgPathPlugin} from "./plugins/unpkg-path-plugin";
+import {fetchPlugin} from "./plugins/fetch-plugin";
 
 const App = () => {
     const [input, setInput] = useState('');
@@ -13,7 +14,8 @@ const App = () => {
         try {
             await esbuild.initialize({
                 worker: true,
-                wasmURL: '/esbuild.wasm'
+                //  wasmURL: '/esbuild.wasm'
+                wasmURL: 'https:unpkg.com/esbuild-wasm@0.8.7/esbuild.wasm'
             });
             setEsEsbuildInitialized(true)
 
@@ -37,7 +39,7 @@ const App = () => {
                 entryPoints: ['index.js'],
                 bundle: true,
                 write: false,
-                plugins: [unpkgPathPlugin()],
+                plugins: [unpkgPathPlugin(), fetchPlugin(input)],
                 define: {
                     'process.env.NODE_ENV': '"production"',
                     global: 'window'
