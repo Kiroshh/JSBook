@@ -29,13 +29,19 @@ const Preview: React.FC<PreviewProps> = ({code}) => {
 
     const iframe = useRef<any>();
 
-    useEffect(()=>{
+    useEffect(() => {
         iframe.current.srcDoc = html;
-        iframe.current.contentWindow.postMessage(code, '*')
+        setTimeout(()=>{
+            iframe.current.contentWindow.postMessage(code, '*')
+        },50)
 
-    },[code])
+    }, [code])
 
-    return <iframe title="code preview" ref={iframe} sandbox="allow-scripts" srcDoc={html}/>;
+    return (<div className={"iframe-wrapper"}>
+
+        <iframe title="code preview" ref={iframe} sandbox="allow-scripts"
+                srcDoc={html}/>
+    </div>);
 };
 
 export default Preview;
