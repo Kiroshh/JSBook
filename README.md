@@ -50,5 +50,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ![img_1.png](img_1.png)
 
-//use the following to test css import
-//import 'bulma/css/bulma.css';
+![img_2.png](img_2.png)
