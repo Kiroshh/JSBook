@@ -7,6 +7,7 @@ import Resizable from "./resizable";
 import {Cell} from "../state/cell";
 import {useActions} from "../hooks/use-actions";
 import {useTypeSelector} from "../hooks/use-type-selector";
+import {useCumulativeCode} from "../hooks/use-cumulativeCode";
 
 interface CodeCellProps {
     cell: Cell
@@ -19,19 +20,21 @@ const CodeCell: React.FC<CodeCellProps> = ({cell}) => {
         state.bundles[cell.id]
     )
 
+    const cumulativeCode = useCumulativeCode(cell.id);
+
     useEffect(() => {
         if (!bundle) {
-            createBundle(cell.id, cell.content);
+            createBundle(cell.id, cumulativeCode);
             return;
         }
 
         const timer = setTimeout(async () => {
-            createBundle(cell.id, cell.content)
+            createBundle(cell.id, cumulativeCode)
         }, 750)
         return () => {
             clearTimeout(timer);
         }
-    }, [cell.id, cell.content, createBundle])
+    }, [cell.id, cumulativeCode, createBundle])
 
 
     return (
