@@ -3,7 +3,7 @@ import {unpkgPathPlugin} from "./plugins/unpkg-path-plugin";
 import {fetchPlugin} from "./plugins/fetch-plugin";
 
 let initialized: boolean = false;
-export default async (rawCode: string) => {
+const bundle= async (rawCode: string) => {
     if (!initialized) {
         try {
             await esbuild.initialize({
@@ -45,3 +45,5 @@ export default async (rawCode: string) => {
 
 
 }
+
+export default bundle;
