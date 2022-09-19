@@ -2,10 +2,17 @@ import './cell-list.css'
 import {useTypeSelector} from "../hooks/use-type-selector";
 import CellListItem from "./cell-list-item";
 import AddCell from "./add-cell";
-import React from "react";
+import React, {useEffect} from "react";
+import {useActions} from "../hooks/use-actions";
 
 
 const CellList: React.FC = () => {
+
+    const{fetchCells}=useActions();
+    useEffect(()=>{
+        fetchCells()
+    },[])
+
     const cells = useTypeSelector(({cells: {order, data}}) => {
         return order.map((id) => {
             return data[id];
